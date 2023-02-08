@@ -6,7 +6,7 @@
 #    By: humartin <humartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 12:36:06 by humartin          #+#    #+#              #
-#    Updated: 2023/02/02 14:08:22 by humartin         ###   ########.fr        #
+#    Updated: 2023/02/06 10:08:29 by humartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,16 @@ all: $(NAME)
 $(NAME): $(SRCS) $(OBJS)
 	@echo $(GREEN) "--Loading--" $(NONE)
 	@sleep 0.2
-	@g++ $(FLAGS) $(SRCS) -o $(NAME)
+	@c++ $(FLAGS) $(SRCS) -o $(NAME)
 	@echo $(GREEN) "$(NAME) was created ! " $(NONE)
 
 %o: %.c
-	g++ -c $(FLAGS) $< -o $@
+	c++ -c $(FLAGS) $< -o $@
 
 clean:
 	@echo $(RED) "-- Deleting-- " $(NONE)
 	@sleep 0.2
-	@ rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 	@echo $(RED) "Objects was deleted" $(NONE)
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: humartin <humartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:50:20 by humartin          #+#    #+#             */
-/*   Updated: 2023/02/02 14:01:42 by humartin         ###   ########.fr       */
+/*   Updated: 2023/02/06 09:56:49 by humartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ class Array
     public:
     Array();   
     Array(unsigned int n);
-    Array(Array<T> const& cln);
-    Array& operator=(Array<T> const &cln);
+    Array(Array<T> const& copy);
+    Array& operator=(Array<T> const &copy);
     T& operator[](int idx) const;
     virtual ~Array();
     class InvalidArray : public std::exception
@@ -65,49 +65,46 @@ class Array
         for (std::size_t i = 0; i < _size; i++)
             _array[i] = i;
 
-        std::cout << "Constructor is called" << std::endl;
+        std::cout << "Constructor Array is called" << std::endl;
     }
 
     template<typename T>
-    Array<T>::Array(Array<T> const& cln) : _array(new T[cln._size]), _size(cln._size)
+    Array<T>::Array(Array<T> const& copy) : _array(new T[copy._size]), _size(copy._size)
     {
-        for (std::size_t i = 0; i < cln._size; i++)
-            _array[i] = cln._array[i];
+        for (std::size_t i = 0; i < copy._size; i++)
+            _array[i] = copy._array[i];
 
         std::cout << "Constructor by copy is called" << std::endl;
     }
 
     template< typename T >
-    Array<T>& Array<T>::operator=(Array<T> const &cln)
+    Array<T>& Array<T>::operator=(Array<T> const &copy)
     {
         std::cout << "operator= is called" << std::endl;
-        if (this != &cln)
+        if (this != &copy)
         {
             delete[] _array;
-            _size = cln._size;
+            _size = copy._size;
             _array = new T[_size];
             for (std::size_t i(0); i < _size; i++)
-                _array[i] = cln._array[i];
-        }
-
-        
+                _array[i] = copy._array[i];
+        }    
         return (*this);
     }
 
-
     template<typename T>
-    T& Array<T>::operator[](int idx) const
+    T& Array<T>::operator[](int index) const
     {
         try
         {
-            if (idx < 0 || idx >= (int)_size)
+            if (index < 0 || index >= (int)_size)
                 throw(Array<T>::InvalidArray());
         }
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
         }      
-        return (_array[idx]);
+        return (_array[index]);
     }
     
     template<typename T>

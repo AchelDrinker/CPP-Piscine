@@ -1,32 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: humartin <humartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 14:06:00 by humartin          #+#    #+#             */
-/*   Updated: 2023/02/07 08:50:20 by humartin         ###   ########.fr       */
+/*   Created: 2023/02/03 10:40:52 by humartin          #+#    #+#             */
+/*   Updated: 2023/02/03 11:20:07 by humartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-#define EASYFIND_HPP
+#ifndef SPAN_HPP
+#define SPAN_HPP
 
 #include <iostream>
 #include <string>
 #include <algorithm>
 #include <vector>
 
-template <class T> 
-void easyFind(T const &container, int nb)
+class Span
 {
-    typename T::const_iterator it = find(container.begin(), container.end(), nb);
+    public:
+        Span(unsigned int n);
+        Span(Span const &i);
+        virtual ~Span();
 
-    if (it == container.end())
-        std::cout << nb << " est perdu quelque part !" << std::endl;
-    else
-        std::cout << nb << " a été trouvé !" << std::endl;
-}
+        Span &operator=(Span const &i);
+
+        void addNumber(int nb);
+        int shortestSpan();
+        int longestSpan();
+
+    private:
+        Span();
+        std::vector<int> _container;
+        unsigned int _size;
+};
+
+
+
+
 
 #endif
